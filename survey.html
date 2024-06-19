@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adventure Time Character Survey</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Mengatur overflow untuk video latar belakang */
+      position: relative;
+    }
+    .video-background {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      object-fit: cover; /* Memastikan video diisi hingga ke tepi */
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.8); /* Background transparan untuk konten */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1; /* Mengatur konten di atas video */
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #333333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    .character-image {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .character-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Video latar belakang -->
+  <video class="video-background" autoplay loop muted playsinline>
+    <source src="https://www.youtube.com/embed/ff5lO8TkVX8?autoplay=1&loop=1&playlist=1CRpUVR4u2g&controls=0" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container">
+    <h1>Adventure Time Character Survey</h1>
+    <form id="characterSurveyForm">
+      <div class="form-group">
+        <label for="characterName">Pilih karakter Adventure Time favorit Anda:</label>
+        <select class="form-control" id="characterName" name="characterName" required>
+          <option value="">Pilih karakter favorit Anda...</option>
+          <option value="Finn">Finn</option>
+          <option value="Jake">Jake</option>
+          <option value="Princess Bubblegum">Princess Bubblegum</option>
+          <option value="Marceline">Marceline</option>
+          <option value="Ice King">Ice King</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      <div class="character-image" id="characterImage">
+        <img src="" alt="Character Image">
+      </div>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript untuk menangani submit form -->
+  <script>
+    $(document).ready(function() {
+      $('#characterSurveyForm').submit(function(event) {
+        event.preventDefault();
+        var selectedCharacter = $('#characterName').val();
+        var characterImage = $('#characterImage img');
+        
+        switch (selectedCharacter) {
+          case 'Finn':
+            characterImage.attr('src', './image/finn.jpg');
+            break;
+          case 'Princess Bubblegum':
+            characterImage.attr('src', './image/princess.jpg');
+            break;
+          case 'Jake':
+            characterImage.attr('src', './image/jake.jpg');
+            break;
+          case 'Marceline':
+            characterImage.attr('src', './image/marceline1.jpg');
+            break;
+          case 'Ice King':
+            characterImage.attr('src', './image/iceking.jpg');
+            break;
+          default:
+            characterImage.attr('src', '');
+        }
+        
+        $('.character-image').fadeIn();
+        alert('Terima kasih telah mengisi survei!');
+        $(this)[0].reset();
+      });
+    });
+  </script>
+</body>
+</html>
